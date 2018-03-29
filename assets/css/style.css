@@ -1,3 +1,103 @@
-#name-input {
-    width: 30em;
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+p {
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 35px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h6 {
+    font-size: 15px;
+}
+
+
+
+.wrapper {
+display: grid;
+grid-template-columns: auto auto auto;
+grid-gap: 5px;
+}
+
+.wrapper > div {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.title {
+    grid-column: 1 / 4;
+    background-color: tomato;
+    padding: 15px;
+}
+
+.message {
+    grid-column: 1 / 4;
+    height: 50px;
+    padding: 10px;
+}
+
+.message-font{
+    font-size: 20px;
+}
+
+.main {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    margin: 0 5px;
+    grid-gap: 5px;
+}
+
+.player-1 {
+    grid-column: 1 / 2;
+    border: 2px solid black;
+    height: 300px;
+}
+
+.info {
+    grid-column: 2 / 3;
+    border: 2px solid black;
+    height: 300px;
+}
+
+.player-2 {
+    grid-column: 3 / 4;
+    border: 2px solid black;
+    height: 300px;
+}
+
+.chat-area-wrapper {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-rows: 5fr 1fr;
+    grid-gap: 5px;
+}
+
+.chat-view {
+    grid-row: 1 / 5;
+    border: solid black 1px;
+    margin: 0 200px;
+    height: 100px;
+    overflow: auto;
+}
+
+.chat-submit {
+    grid-row: 5 / 6;
+}
+
+.footer {
+    grid-column: 1 / 4;
+    text-align: center;
+    padding-top: 50px;
 }
