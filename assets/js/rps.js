@@ -17,6 +17,8 @@
   //  Make a constant for the auth
   const auth = firebase.auth();
 
+  var gameState;
+
 
   //  This event listener will take the email and password typed and sign in with them.  Returns an error of the user is not found
   $("#login-button").on("click", function(){
@@ -59,7 +61,7 @@
     if(firebaseUser){
       $("#logout-button").removeClass("hide");
       $("#login-button").addClass("hide");
-      $("#signup-button").addClass("hide");
+      $("#signup-modal").addClass("hide");
       $("#login-email").addClass("hide");
       $("#login-pass").addClass("hide");
       $("#message").text(firebaseUser.email + " is currently signed in.")
@@ -67,7 +69,7 @@
     } else {
       $("#logout-button").addClass("hide");
       $("#login-button").removeClass("hide");
-      $("#signup-button").removeClass("hide");
+      $("#signup-modal").removeClass("hide");
       $("#login-email").removeClass("hide");
       $("#login-pass").removeClass("hide");
       $("#message").text("No one is signed in at the moment.")
@@ -111,14 +113,17 @@
     }
   })
 
+  //  Show modal if sign-up is clicked
   $("#signup-modal").on("click", function(){
     $(".signup-modal").show();
   })
 
+  //   Event listener to close signin modal if x is clicked
   $(".close").on("click", function(){
     $(".signup-modal").hide();
   })
 
+  //  Event listener to close signin modal if the modal is clicked in the gray area
   $(document).on("click", function(event){
     // not sure why the jquery reference to this would not work but whatever, i should use js instead
     var signupModal = document.getElementById("signup");

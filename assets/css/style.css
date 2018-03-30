@@ -109,6 +109,11 @@ grid-gap: 5px;
 
 .chat-submit {
     grid-row: 5 / 6;
+    margin: 0 200px;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-gap: 5px;
+    padding: 0;
 }
 
 .footer {
@@ -120,6 +125,10 @@ grid-gap: 5px;
 #chat-messages {
     text-align: left;
     font-size: 12px;
+}
+
+#chat-message {
+    width: 100%;
 }
 
 /*MODAL STUFF*/
