@@ -21,8 +21,8 @@
   //  This event listener will take the email and password typed and sign in with them.  Returns an error of the user is not found
   $("#login-button").on("click", function(){
     event.preventDefault();
-    var email = $("#name-input").val().trim();
-    var pass = $("#pass-input").val().trim();
+    var email = $("#login-email").val().trim();
+    var pass = $("#login-pass").val().trim();
     const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.catch(e => $("#message").text(e));
     $("#name-input").val("");
@@ -65,6 +65,7 @@
       $("#email-input").addClass("hide");
       $("#pass-input").addClass("hide");
       $("#message").text(firebaseUser.email + " is currently signed in.")
+      $(".signup-modal").hide();
     } else {
       $("#logout-button").addClass("hide");
       $("#login-button").removeClass("hide");
@@ -101,7 +102,7 @@
       if(textarea.length){
         textarea.scrollTop(textarea[0].scrollHeight - textarea.height());
       }
-      //$("#chat-messages").text(message.name + ": " + message.message);
+
     }
 
   })
@@ -111,6 +112,23 @@
     if(event.keyCode === 13){
       $("#submit-chat").click();
     }
+  })
+
+  $("#signup-modal").on("click", function(){
+    $(".signup-modal").show();
+  })
+
+  $(".close").on("click", function(){
+    $(".signup-modal").hide();
+  })
+
+  $(document).on("click", function(event){
+    // not sure why the jquery reference to this would not work but whatever, i should use js instead
+    var signupModal = document.getElementById("signup");
+    if (event.target == signupModal){
+      $(".signup-modal").hide();
+    }
+    
   })
 
 /*

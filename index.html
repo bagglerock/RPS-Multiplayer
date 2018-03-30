@@ -20,11 +20,10 @@
 
         <div class="message-wrapper">
             <div class="user-login">
-                <input class="user-login-font" type="text" size="25" placeholder="Enter name" id="name-input">
-                <input class="user-login-font" type="text" size="25" placeholder="Enter email" id="email-input">
-                <input class="user-login-font" type="text" size="25" placeholder="Enter password" id="pass-input">
+                <input class="user-login-font" type="text" size="25" placeholder="Enter email" id="login-email">
+                <input class="user-login-font" type="text" size="25" placeholder="Enter password" id="login-pass">
                 <button class="user-login-font" type=button id="login-button">Log In</button>
-                <button class="user-login-font" type=button id="signup-button">Sign Up</button>
+                <button class="user-login-font" type=button id="signup-modal">Sign Up</button>
                 <button class="user-login-font hide" type=button id="logout-button">Log Out</button>
             </div>
             <div class="messages" id="message"></div>
@@ -63,6 +62,24 @@
             <h6>&copy;2018 Oscar Villalta</h6>
         </div>
 
+    </div>
+
+    <div id="signup" class="signup-modal">
+        <div class="signup-content">
+            <div class="signup-div close">&times;</div>
+            <div class="signup-div">
+                <input class="user-login-font" type="text" size="25" placeholder="Enter name" id="name-input">
+            </div>
+            <div class="signup-div">
+                <input class="user-login-font" type="text" size="25" placeholder="Enter email" id="email-input">
+            </div>
+            <div class="signup-div">
+                <input class="user-login-font" type="text" size="25" placeholder="Enter password" id="pass-input">
+            </div>
+            <div class="signup-div">
+                <button class="user-login-font" type=button id="signup-button">Sign Up</button>
+            </div>
+        </div>
     </div>
 
 </body>
