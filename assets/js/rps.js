@@ -25,9 +25,8 @@
     var pass = $("#login-pass").val().trim();
     const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.catch(e => $("#message").text(e));
-    $("#name-input").val("");
-    $("#email-input").val("");
-    $("#pass-input").val("");
+    $("#login-email").val("");
+    $("#login-pass").val("");
   })
   
 
@@ -61,18 +60,16 @@
       $("#logout-button").removeClass("hide");
       $("#login-button").addClass("hide");
       $("#signup-button").addClass("hide");
-      $("#name-input").addClass("hide");
-      $("#email-input").addClass("hide");
-      $("#pass-input").addClass("hide");
+      $("#login-email").addClass("hide");
+      $("#login-pass").addClass("hide");
       $("#message").text(firebaseUser.email + " is currently signed in.")
       $(".signup-modal").hide();
     } else {
       $("#logout-button").addClass("hide");
       $("#login-button").removeClass("hide");
       $("#signup-button").removeClass("hide");
-      $("#name-input").removeClass("hide");
-      $("#email-input").removeClass("hide");
-      $("#pass-input").removeClass("hide");
+      $("#login-email").removeClass("hide");
+      $("#login-pass").removeClass("hide");
       $("#message").text("No one is signed in at the moment.")
     }
   })
