@@ -17,103 +17,49 @@
   //  Make a constant for the auth
   const auth = firebase.auth();
 
-
-  //  This event listener will take the email and password typed and sign in with them.  Returns an error of the user is not found
   $("#login-button").on("click", function(){
     event.preventDefault();
-    var email = $("#name-input").val().trim();
+    var name = $("#name-input").val().trim();
     var pass = $("#pass-input").val().trim();
-    const promise = auth.signInWithEmailAndPassword(email, pass);
-    promise.catch(e => $("#message").text(e));
+    const promise = auth.signInWithEmailAndPassword(name, pass);
+    promise.catch(e => console.log(e.message));
     $("#name-input").val("");
-    $("#email-input").val("");
     $("#pass-input").val("");
   })
   
-
-  //  This event listener will take the email and password typed and create a new user along with a display name
   $("#signup-button").on("click", function(){
     event.preventDefault();
     var name = $("#name-input").val().trim();
-    var email = $("#email-input").val().trim();
     var pass = $("#pass-input").val().trim();
-    const promise = auth.createUserWithEmailAndPassword(email, pass).then(function(user){
-      user.updateProfile({displayName: name});
-    });
-    //  return an error in case and show it under messages
-    promise.catch(e => $("#message").text(e));
+    const promise = auth.createUserWithEmailAndPassword(name, pass);
+    promise.catch(e => console.log(e.message));
     $("#name-input").val("");
-    $("#email-input").val("");
     $("#pass-input").val("");
   })
 
-
-  //  This event listener will log out the current user
   $("#logout-button").on("click", function(){
-    event.preventDefault();
     auth.signOut();
   })
 
-
-  //  Anytime the user has logged in, logged out, this will do a bunch of things
   auth.onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
+      console.log(firebaseUser);
       $("#logout-button").removeClass("hide");
       $("#login-button").addClass("hide");
       $("#signup-button").addClass("hide");
       $("#name-input").addClass("hide");
-      $("#email-input").addClass("hide");
       $("#pass-input").addClass("hide");
-      $("#message").text(firebaseUser.email + " is currently signed in.")
     } else {
+      console.log("not logged in");
       $("#logout-button").addClass("hide");
       $("#login-button").removeClass("hide");
       $("#signup-button").removeClass("hide");
       $("#name-input").removeClass("hide");
-      $("#email-input").removeClass("hide");
       $("#pass-input").removeClass("hide");
-      $("#message").text("No one is signed in at the moment.")
     }
   })
+  /*auth.signInWithEmailAndPassword(email, pass); // returns promise but only once
 
-
-  //  add to chat some message
-  $("#submit-chat").on("click", function(){
-    event.preventDefault();
-    var message = $("#chat-message").val();
-    var currentUserName = auth.currentUser.displayName;
-    database.ref("/chat").push().set({
-      name: currentUserName,
-      message: message
-    })
-    $("#chat-message").val("");
-  })
-
-  //  show the chat content;
-  database.ref("/chat").on("child_added", function(snapshot){
-    var message = snapshot.val();
-    if (message.name !== undefined){
-      var pTag = $("<p>");
-      pTag.text(message.name + ": " + message.message);
-      $("#chat-messages").append(pTag);
-      //  neat little piece of code that autoscrolls to the bottom of the text area
-      var textarea = $("#chat-messages");
-      if(textarea.length){
-        textarea.scrollTop(textarea[0].scrollHeight - textarea.height());
-      }
-      //$("#chat-messages").text(message.name + ": " + message.message);
-    }
-
-  })
-
-  //  piece of code so hitting enter in the chat area will click submit the message
-  $("#chat-message").keyup(function(event){
-    if(event.keyCode === 13){
-      $("#submit-chat").click();
-    }
-  })
-
-/*
   auth.createUserWithEmailAndPassword(email, pass); //returns promise but only once
 
   auth.onAuthStateChanged(firebaseUser => {}); //monitors user real time
