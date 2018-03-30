@@ -56,23 +56,27 @@
   })
 
 
-  //  Anytime the user has logged in, logged out, this will do a bunch of things
+  //  Anytime the user has logged in, logged out, this shows and hides things on the DOM
   auth.onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
+      $("#message").text(firebaseUser.email + " is currently signed in.")
       $("#logout-button").removeClass("hide");
       $("#login-button").addClass("hide");
       $("#signup-modal").addClass("hide");
       $("#login-email").addClass("hide");
       $("#login-pass").addClass("hide");
-      $("#message").text(firebaseUser.email + " is currently signed in.")
       $(".signup-modal").hide();
+      $("#chat-message").removeClass("hide");
+      $("#submit-chat").removeClass("hide");
     } else {
+      $("#message").text("No one is signed in at the moment.")
       $("#logout-button").addClass("hide");
       $("#login-button").removeClass("hide");
       $("#signup-modal").removeClass("hide");
       $("#login-email").removeClass("hide");
       $("#login-pass").removeClass("hide");
-      $("#message").text("No one is signed in at the moment.")
+      $("#chat-message").addClass("hide");
+      $("#submit-chat").addClass("hide");
     }
   })
 
@@ -163,6 +167,8 @@ when the result is displayed there is a timer that displays the result for a cer
 when the game starts over then the game restarts and the turn is on 1
 
 
+Things to fix:
 
+make it so the chat box is not active if the user is not signed in
   */
   
