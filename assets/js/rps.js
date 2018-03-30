@@ -17,7 +17,11 @@
   //  Make a constant for the auth
   const auth = firebase.auth();
 
-  var gameState;
+  var gameState = {
+    closed: 0,
+    open: 1,
+    joined: 2,
+  }
 
 
   //  This event listener will take the email and password typed and sign in with them.  Returns an error of the user is not found
@@ -68,6 +72,8 @@
       $(".signup-modal").hide();
       $("#chat-message").removeClass("hide");
       $("#submit-chat").removeClass("hide");
+      createGame();
+
     } else {
       $("#message").text("No one is signed in at the moment.")
       $("#logout-button").addClass("hide");
@@ -77,8 +83,45 @@
       $("#login-pass").removeClass("hide");
       $("#chat-message").addClass("hide");
       $("#submit-chat").addClass("hide");
+
+      database.ref("/game").set({
+        creator: {
+          "displayName" : "" ,
+          "uid" : "",
+          "state" : gameState.closed
+        }
+
+      })
+      database.ref()
     }
   })
+
+  function createGame() {
+    var user = auth.currentUser;
+    var currentGame = {
+      creator : {
+        uid : user.uid,
+        displayName: user.displayName
+      },
+      state : gameState.open
+    }
+    database.ref("/games").push().set(currentGame);
+  }
+
+  function joinGame(key){
+    var user = auth.currentUser;
+    var gameRef = database.ref("/games").child(key);
+    gameRef.transaction(function(game){
+      if(!game.joiner){
+        game.state = gameState.joined;
+        game.joiner = {
+          uid : user.uid,
+          displayName : user.displayName
+        }
+      }
+      return game;
+    })
+  }
 
 
   //  add to chat some message
@@ -169,6 +212,6 @@ when the game starts over then the game restarts and the turn is on 1
 
 Things to fix:
 
-make it so the chat box is not active if the user is not signed in
+check if user is logged in before signing on... making an error
   */
   
