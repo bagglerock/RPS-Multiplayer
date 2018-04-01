@@ -21,6 +21,10 @@
     closed: 0,
     open: 1,
     joined: 2,
+    p1choose: 3,
+    p2choose: 4,
+    result: 5
+
   }
 
 
@@ -72,7 +76,16 @@
       $(".signup-modal").hide();
       $("#chat-message").removeClass("hide");
       $("#submit-chat").removeClass("hide");
-      createGame();
+      /*if(gameState === 0){
+        createGame(); //makes this user the creator
+        gameState = 1; //Open
+      }
+      else if (gameState === 1){
+        setPlayer2();
+        gameState = 2; //Joined
+      }
+      */
+      
 
     } else {
       $("#message").text("No one is signed in at the moment.")
@@ -83,17 +96,17 @@
       $("#login-pass").removeClass("hide");
       $("#chat-message").addClass("hide");
       $("#submit-chat").addClass("hide");
-
-      database.ref("/game").set({
-        creator: {
-          "displayName" : "" ,
-          "uid" : "",
-          "state" : gameState.closed
-        }
-
-      })
-      database.ref()
+      /*
+      
+      
+      */ 
     }
+  })
+
+  var openGames = database.ref("/games").orderByChild("state").equalTo(gameState.open);
+  openGames.on("child_added", function(snapshot){
+    var data = snapshot.val();
+    console.log(data);
   })
 
   function createGame() {
