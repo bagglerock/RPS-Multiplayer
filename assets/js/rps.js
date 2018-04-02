@@ -41,10 +41,11 @@ function createGame() {
     },
     state: gameState.open
   };
-  database
+  var test = database
     .ref("/games")
     .push()
     .set(currentGame);
+    console.log(test);
 }
 
 
@@ -133,12 +134,15 @@ openGames.on("child_added", function(snapshot) {
 function addJoinGameButton(key, data) {
   var gameInfoDiv = $("<div>");
   var gameCreatorHeader = $("<h4>");
-  gameCreatorHeader.text(data.creator.displayName);
-  gameInfoDiv.append(gameCreatorHeader);
-  $("#games").append(gameInfoDiv);
+
   var joinButtonDiv = $("<div>");
   var joinButton = $("<button>");
-  joinButton.text("Join Game").attr("key", key).attr("id", "join-button");
+
+  joinButton
+  .text("Join " + data.creator.displayName)
+  .attr("key", key)
+  .attr("id", "join-button");
+
   joinButtonDiv.append(joinButton);
   $("#games").append(joinButtonDiv);
 }
@@ -155,7 +159,7 @@ function joinGame(key) {
       };
     }
     console.log("joiner has joined");
-    
+
     return game;
   });
 }
