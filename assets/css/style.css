@@ -58,6 +58,12 @@ grid-gap: 5px;
     height: 50px;
 }
 
+.button{
+    background-color: white;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
 .user-login-font{
     font-size: 15px;
 }
@@ -69,6 +75,7 @@ grid-gap: 5px;
 .available-games {
     display: inline-block;
     height: 50px;
+
 }
 
 .available-games > div {
@@ -130,6 +137,14 @@ grid-gap: 5px;
     grid-column: 1 / 4;
     text-align: center;
     padding-top: 50px;
+}
+
+#create-game-area {
+    padding: 5px 0 20px 0 ;
+}
+
+#games {
+    padding-top: 15px;
 }
 
 #chat-messages {

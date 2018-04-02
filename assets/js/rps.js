@@ -32,6 +32,8 @@ var gameState = {
 
 //*  Functions */
 
+$()
+
 function createGame() {
   var user = auth.currentUser;
   var currentGame = {
@@ -47,6 +49,10 @@ function createGame() {
     .set(currentGame);
     console.log(test);
 }
+
+$("#create-game").on("click", function(){
+  createGame();
+})
 
 
 
@@ -131,15 +137,23 @@ openGames.on("child_added", function(snapshot) {
   }
 });
 
+openGames.on("child_removed", function(snapshot){
+  var game = $("[key="+snapshot.key+"]");
+  console.log(game);
+  if (game){
+    game.remove();
+  }
+})
+
 function addJoinGameButton(key, data) {
   var gameInfoDiv = $("<div>");
   var gameCreatorHeader = $("<h4>");
-
   var joinButtonDiv = $("<div>");
   var joinButton = $("<button>");
 
   joinButton
   .text("Join " + data.creator.displayName)
+  .addClass("button")
   .attr("key", key)
   .attr("id", "join-button");
 
@@ -186,6 +200,8 @@ auth.onAuthStateChanged(firebaseUser => {
     $(".signup-modal").hide();
     $("#chat-message").removeClass("hide");
     $("#submit-chat").removeClass("hide");
+    $("#available-games-area").removeClass("hide");
+    $("#create-game-area").removeClass("hide");
 
 
     /*if(gameState === 0){
@@ -206,6 +222,8 @@ auth.onAuthStateChanged(firebaseUser => {
     $("#login-pass").removeClass("hide");
     $("#chat-message").addClass("hide");
     $("#submit-chat").addClass("hide");
+    $("#available-games-area").addClass("hide");
+    $("#create-game-area").addClass("hide");
     /*
       
       
