@@ -66,6 +66,16 @@ grid-gap: 5px;
     display:none;
 }
 
+.available-games {
+    display: inline-block;
+    height: 50px;
+}
+
+.available-games > div {
+    float: left;
+}
+
+
 .main {
     grid-column: 1 / 4;
     display: grid;
