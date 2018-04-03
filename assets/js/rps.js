@@ -32,6 +32,14 @@ function watchGame(key) {
   gameRef.on("value", function(snapshot) {
     var game = snapshot.val();
     switch (game.state) {
+      
+      case gameState.open:
+        if (auth.currentUser.uid === game.creator.uid) {
+          $("#available-games-area").addClass("hide");
+          $("#create-game-area").addClass("hide");
+        }
+        break;
+
       case gameState.joined:
         if (auth.currentUser.uid === game.creator.uid) {
           console.log("you are the creator and its your turn");
@@ -39,21 +47,26 @@ function watchGame(key) {
           $("#available-games-area").addClass("hide");
           $("#create-game-area").addClass("hide");
           $("#creator-choice").attr("game-id", key);
-          game.state = gameState.p1chose;
-          console.log(game.state);
-          game.state = gameState.result;
-        } else if (auth.currentUser.uid === game.joiner.uid){
+        } else if (auth.currentUser.uid === game.joiner.uid) {
           console.log("wait your turn");
         }
+        break;
 
-        break;
       case gameState.p1chose:
-        $("#creator-choices").addClass("hide");
-        $("#joiner-choices").removeClass("hide");
+        if (auth.currentUser.uid === game.joiner.uid) {
+          console.log("you are the creator and its your turn");
+          $("#joiner-choices").removeClass("hide");
+          $("#joiner-choice").attr("game-id", key);
+        } else if (auth.currentUser.uid === game.creator.uid) {
+          $("#creator-choices").addClass("hide");
+          console.log("You already went so wait");
+        }
         break;
+
       case gameState.p2chose:
-        compareChoices();
+        console.log("compareChoices");
         break;
+
       case gameState.result:
         console.log("result");
         showResult();
@@ -70,8 +83,27 @@ database.ref("/games").on("child_changed", function(snapshot) {
 $("#creator-choice").on("click", function() {
   var choice = $("input[name=rps]:checked").val();
   var gameId = $(this).attr("game-id");
-  database.ref("/games").push().set({
-    choice: choice,
-    state: gameState.p1chose
-  });
+  var ref = database.ref("/games/" + gameId);
+  ref.child("state").set(gameState.p1chose);
+  ref.child("/creator/choice").set(choice);
 });
+
+$("#joiner-choice").on("click", function() {
+  var choice = $("input[name=rps]:checked").val();
+  var gameId = $(this).attr("game-id");
+  var ref = database.ref("/games/" + gameId);
+  ref.child("state").set(gameState.p2chose);
+  ref.child("/joiner/choice").set(choice);
+});
+
+function setCreatorChoice(key, choice) {
+  var user = auth.currentUser;
+  var gameRef = database.ref("/games").child(key);
+  gameRef.transaction(function(game) {
+    if (!game.joiner) {
+      game.state = gameState.p1chose;
+      game.choice = choice;
+    }
+    return game;
+  });
+}
