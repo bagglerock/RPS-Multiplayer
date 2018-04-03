@@ -26,18 +26,20 @@ var gameState = {
   p2chose: 4,
   result: 5
 };
+var showResult = 3000;
 
 function watchGame(key) {
   var gameRef = ref.child(key);
   gameRef.on("value", function(snapshot) {
     var game = snapshot.val();
     switch (game.state) {
-      
       case gameState.open:
         if (auth.currentUser.uid === game.creator.uid) {
           $("#available-games-area").addClass("hide");
           $("#create-game-area").addClass("hide");
-          $("#message").text(game.creator.displayName + " has just created a game.")
+          $("#message").text(
+            game.creator.displayName + " has just created a game."
+          );
         }
         break;
 
@@ -49,7 +51,11 @@ function watchGame(key) {
           $("#create-game-area").addClass("hide");
           $("#creator-choice").attr("game-id", key);
         } else if (auth.currentUser.uid === game.joiner.uid) {
-          $("#message").text("You have joined " + game.creator.displayName + ".  Please wait till they make a choice.");
+          $("#message").text(
+            "You have joined " +
+              game.creator.displayName +
+              ".  Please wait till they make a choice."
+          );
           $("#create-game-area").addClass("hide");
           $("#available-games-area").addClass("hide");
         }
@@ -57,17 +63,46 @@ function watchGame(key) {
 
       case gameState.p1chose:
         if (auth.currentUser.uid === game.joiner.uid) {
-          $("#message").text(game.creator.displayName + " has just went so it's your turn.")
+          $("#message").text(
+            game.creator.displayName + " has just went so it's your turn."
+          );
           $("#joiner-choices").removeClass("hide");
           $("#joiner-choice").attr("game-id", key);
         } else if (auth.currentUser.uid === game.creator.uid) {
           $("#creator-choices").addClass("hide");
-          $("#message").text("Nice move, now wait for the next player to choose.")
+          $("#message").text(
+            "Nice move, now wait for the next player to choose."
+          );
         }
         break;
 
       case gameState.p2chose:
-        console.log("compareChoices");
+        $("#joiner-choice").addClass("hide");
+        var result = "";
+        var creatorChoice = game.creator.choice;
+        var joinerChoice = game.joiner.choice;
+        if (creatorChoice === joinerChoice) {
+          result = "tie";
+        } else if (creatorChoice === "rock") {
+          if (joinerChoice === "scissors") {
+            result = "win";
+          } else {
+            result = "lose";
+          }
+        } else if (creatorChoice === "paper") {
+          if (joinerChoice === "rock") {
+            result = "win";
+          } else {
+            result = "lose";
+          }
+        } else if (creatorChoice === "scissors") {
+          if (joinerChoice === "paper") {
+            result = "win";
+          } else {
+            result = "lose";
+          }
+        }
+        console.log(result);
         break;
 
       case gameState.result:
