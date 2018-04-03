@@ -14,6 +14,7 @@ firebase.initializeApp(config);
 
 //set some variables, one for database and another for auth
 var database = firebase.database();
+var ref = firebase.database().ref("/games");
 var auth = firebase.auth();
 
 //have an array for the game states to be saved for a game
@@ -26,17 +27,16 @@ var gameState = {
   result: 5
 };
 
-var globalKey = "";
 
 function watchGame(key) {
-  console.log("here");
-  var gameRef = database.ref("/games").child(key);
-  console.log(gameRef);
+  var gameRef = ref.child(key);
   gameRef.on("value", function(snapshot) {
     var game = snapshot.val();
     switch (game.state) {
       case gameState.joined:
-      console.log("hi");
+      $("#creator-choices").removeClass("hide");
+      $("#available-games-area").addClass("hide");
+      $("#create-game-area").addClass("hide");
       game.state = gameState.result;
         displayChoices("creator-options");
         break;
@@ -56,27 +56,10 @@ function watchGame(key) {
 
 
 function displayChoices(who){//  change this to show
-  var br1 = $("<br>");
-  var br2 = $("<br>");
-  var radioForm = $("<form>");
-  var radioInputRock = $("<input>");
-  var rockLabel = $("<label>");
-  var radioInputPaper = $("<input>");
-  var paperLabel = $("<label>");
-  var radioInputScissors = $("<input>");
-  var scissorsLabel = $("<label>");
-  radioInputRock.attr("type", "radio").attr("name", "rps").attr("value", "rock");
-  rockLabel.text("Rock");
-  radioInputPaper.attr("type", "radio").attr("name", "rps").attr("value", "paper");
-  paperLabel.text("Paper");
-  radioInputScissors.attr("type", "radio").attr("name", "rps").attr("value", "scissors");
-  scissorsLabel.text("Scissors");
-  radioForm.append(radioInputRock, rockLabel, br1, radioInputPaper, paperLabel, br2, radioInputScissors, scissorsLabel);
-  $("#"+who).append(radioForm);
 
 }
 
-database.ref("/games/"+globalKey).on("value", function(){
-  console.log("something");
-  watchGame(globalKey);
+database.ref("/games").on("child_changed", function(snapshot){
+  var currentGame = snapshot.key;
+  watchGame(currentGame);
 });

@@ -11,8 +11,6 @@ function createGame() {
     .ref("/games")
     .push()
     .set(currentGame);
-
-    console.log(globalKey);
 }
 
 function addJoinGameButton(key, data) {
@@ -42,7 +40,6 @@ function joinGame(key) {
         displayName: user.displayName
       };
     }
-    
     return game;
   });
 }
@@ -76,5 +73,4 @@ $(document).on("click", "#join-button", function() {
   var key = $(this).attr("key");
   var game = joinGame(key);
   globalKey = key;
-  console.log(globalKey);
 });
