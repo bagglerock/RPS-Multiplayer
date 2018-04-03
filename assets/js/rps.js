@@ -37,6 +37,7 @@ function watchGame(key) {
         if (auth.currentUser.uid === game.creator.uid) {
           $("#available-games-area").addClass("hide");
           $("#create-game-area").addClass("hide");
+          $("#message").text(game.creator.displayName + " has just created a game.")
         }
         break;
 
@@ -48,18 +49,20 @@ function watchGame(key) {
           $("#create-game-area").addClass("hide");
           $("#creator-choice").attr("game-id", key);
         } else if (auth.currentUser.uid === game.joiner.uid) {
-          console.log("wait your turn");
+          $("#message").text("You have joined " + game.creator.displayName + ".  Please wait till they make a choice.");
+          $("#create-game-area").addClass("hide");
+          $("#available-games-area").addClass("hide");
         }
         break;
 
       case gameState.p1chose:
         if (auth.currentUser.uid === game.joiner.uid) {
-          console.log("you are the creator and its your turn");
+          $("#message").text(game.creator.displayName + " has just went so it's your turn.")
           $("#joiner-choices").removeClass("hide");
           $("#joiner-choice").attr("game-id", key);
         } else if (auth.currentUser.uid === game.creator.uid) {
           $("#creator-choices").addClass("hide");
-          console.log("You already went so wait");
+          $("#message").text("Nice move, now wait for the next player to choose.")
         }
         break;
 
@@ -74,6 +77,11 @@ function watchGame(key) {
     }
   });
 }
+
+database.ref("/games").on("child_added", function(snapshot) {
+  var currentGame = snapshot.key;
+  watchGame(currentGame);
+});
 
 database.ref("/games").on("child_changed", function(snapshot) {
   var currentGame = snapshot.key;
@@ -95,15 +103,3 @@ $("#joiner-choice").on("click", function() {
   ref.child("state").set(gameState.p2chose);
   ref.child("/joiner/choice").set(choice);
 });
-
-function setCreatorChoice(key, choice) {
-  var user = auth.currentUser;
-  var gameRef = database.ref("/games").child(key);
-  gameRef.transaction(function(game) {
-    if (!game.joiner) {
-      game.state = gameState.p1chose;
-      game.choice = choice;
-    }
-    return game;
-  });
-}

@@ -72,5 +72,4 @@ $("#create-game").on("click", function() {
 $(document).on("click", "#join-button", function() {
   var key = $(this).attr("key");
   var game = joinGame(key);
-  globalKey = key;
 });
