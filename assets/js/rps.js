@@ -77,7 +77,7 @@ function watchGame(key) {
         break;
 
       case gameState.p2chose:
-        $("#joiner-choice").addClass("hide");
+        $("#joiner-choices").addClass("hide");
         var result = "";
         var creatorChoice = game.creator.choice;
         var joinerChoice = game.joiner.choice;
@@ -85,21 +85,21 @@ function watchGame(key) {
           result = "tie";
         } else if (creatorChoice === "rock") {
           if (joinerChoice === "scissors") {
-            result = "win";
+            result = game.creator.displayName + " wins";
           } else {
-            result = "lose";
+            result = game.joiner.displayName + " wins";
           }
         } else if (creatorChoice === "paper") {
           if (joinerChoice === "rock") {
-            result = "win";
+            result = game.creator.displayName + " wins";
           } else {
-            result = "lose";
+            result = game.joiner.displayName + " wins";
           }
         } else if (creatorChoice === "scissors") {
           if (joinerChoice === "paper") {
-            result = "win";
+            result = game.creator.displayName + " wins";
           } else {
-            result = "lose";
+            result = game.joiner.displayName + " wins";
           }
         }
         console.log(result);
