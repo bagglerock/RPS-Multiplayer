@@ -1,3 +1,32 @@
+//  On auth changes - DOM manipulation
+auth.onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+      $("#message").text(firebaseUser.email + " is currently signed in.");
+      $("#logout-button").removeClass("hide");
+      $("#login-button").addClass("hide");
+      $("#signup-modal").addClass("hide");
+      $("#login-email").addClass("hide");
+      $("#login-pass").addClass("hide");
+      $(".signup-modal").hide();
+      $("#chat-message").removeClass("hide");
+      $("#submit-chat").removeClass("hide");
+      $("#available-games-area").removeClass("hide");
+      $("#create-game-area").removeClass("hide");
+    } else {
+      $("#message").text("No one is signed in at the moment.");
+      $("#logout-button").addClass("hide");
+      $("#login-button").removeClass("hide");
+      $("#signup-modal").removeClass("hide");
+      $("#login-email").removeClass("hide");
+      $("#login-pass").removeClass("hide");
+      $("#chat-message").addClass("hide");
+      $("#submit-chat").addClass("hide");
+      $("#available-games-area").addClass("hide");
+      $("#create-game-area").addClass("hide");
+    }
+  });
+
+
 //  Regular Login - if user has signed up
 $("#login-button").on("click", function() {
   event.preventDefault();

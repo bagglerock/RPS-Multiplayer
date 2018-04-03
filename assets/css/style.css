@@ -156,6 +156,26 @@ grid-gap: 5px;
     width: 100%;
 }
 
+.rps-choices {
+    padding-top: 50px;
+    font-size: 40px;
+}
+
+.rps-hoices > ul > li{
+    line-height: 60px;
+}
+
+.rps-choices > ul > li > input{
+    cursor: pointer;
+
+}
+
+.checkmark {
+    background-color: red;
+}
+
+
+
 /*MODAL STUFF*/
 
 .signup-modal {
