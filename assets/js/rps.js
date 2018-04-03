@@ -27,39 +27,51 @@ var gameState = {
   result: 5
 };
 
-
 function watchGame(key) {
   var gameRef = ref.child(key);
   gameRef.on("value", function(snapshot) {
     var game = snapshot.val();
     switch (game.state) {
       case gameState.joined:
-      $("#creator-choices").removeClass("hide");
-      $("#available-games-area").addClass("hide");
-      $("#create-game-area").addClass("hide");
-      game.state = gameState.result;
-        displayChoices("creator-options");
+        if (auth.currentUser.uid === game.creator.uid) {
+          console.log("you are the creator and its your turn");
+          $("#creator-choices").removeClass("hide");
+          $("#available-games-area").addClass("hide");
+          $("#create-game-area").addClass("hide");
+          $("#creator-choice").attr("game-id", key);
+          game.state = gameState.p1chose;
+          console.log(game.state);
+          game.state = gameState.result;
+        } else if (auth.currentUser.uid === game.joiner.uid){
+          console.log("wait your turn");
+        }
+
         break;
       case gameState.p1chose:
-        displayChoices("joiner-options");
+        $("#creator-choices").addClass("hide");
+        $("#joiner-choices").removeClass("hide");
         break;
       case gameState.p2chose:
-      compareChoices();
+        compareChoices();
         break;
       case gameState.result:
-      console.log("result");
+        console.log("result");
         showResult();
         break;
     }
   });
 }
 
-
-function displayChoices(who){//  change this to show
-
-}
-
-database.ref("/games").on("child_changed", function(snapshot){
+database.ref("/games").on("child_changed", function(snapshot) {
   var currentGame = snapshot.key;
   watchGame(currentGame);
+});
+
+$("#creator-choice").on("click", function() {
+  var choice = $("input[name=rps]:checked").val();
+  var gameId = $(this).attr("game-id");
+  database.ref("/games").push().set({
+    choice: choice,
+    state: gameState.p1chose
+  });
 });
