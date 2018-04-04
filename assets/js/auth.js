@@ -23,6 +23,8 @@ auth.onAuthStateChanged(firebaseUser => {
       $("#submit-chat").addClass("hide");
       $("#available-games-area").addClass("hide");
       $("#create-game-area").addClass("hide");
+      $("#creator-choices").addClass("hide");
+      $("#joiner-choice").addClass("hide");
     }
   });
 

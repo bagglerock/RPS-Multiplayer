@@ -52,9 +52,9 @@ function watchGame(key) {
           $("#creator-choice").attr("game-id", key);
         } else if (auth.currentUser.uid === game.joiner.uid) {
           $("#message").text(
-            "You have joined " +
+            "You are now in the game with " +
               game.creator.displayName +
-              ".  Please wait till they make a choice."
+              ".  Please wait till " + game.creator.displayName + " makes a choice."
           );
           $("#create-game-area").addClass("hide");
           $("#available-games-area").addClass("hide");
@@ -77,6 +77,7 @@ function watchGame(key) {
         break;
 
       case gameState.p2chose:
+        $("#message").text("");
         $("#joiner-choices").addClass("hide");
         var result = "";
         var creatorChoice = game.creator.choice;
@@ -102,12 +103,15 @@ function watchGame(key) {
             result = game.joiner.displayName + " wins";
           }
         }
-        console.log(result);
+        $("#game-result").text(result);
+        console.log(game);
+        gameRef.child("state").set(gameState.result);
         break;
 
       case gameState.result:
-        console.log("result");
-        showResult();
+        setTimeout(function(){
+          gameRef.child("state").set(gameState.joined);
+        }, showResult);
         break;
     }
   });
