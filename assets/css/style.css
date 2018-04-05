@@ -1,5 +1,5 @@
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Poiret One', cursive;
 }
 
 p {
@@ -52,18 +52,27 @@ grid-template-columns: auto auto auto;
     grid-row: 1 / 2;
     height: 25px;
     padding: 10px;
-    background-color: green;
+    background-color: rgb(99, 38, 23);
+}
+
+.user-login > input {
+    font-family: 'Poiret One', cursive;
 }
 
 .messages {
     grid-row: 2 / 3;
     height: 50px;
+    padding-top: 30px;
+    background-color: white;
 }
 
 .button{
-    background-color: white;
-    border-radius: 12px;
-    font-size: 14px;
+    background-color: maroon;
+    color: white;
+    border-radius: 25px;
+    border: solid 1px black;
+    font-size: 18px;
+    font-family: 'Poiret One', cursive;
 }
 
 .user-login-font{
@@ -139,23 +148,6 @@ grid-template-columns: auto auto auto;
     grid-column: 1 / 4;
     text-align: center;
     padding-top: 50px;
-}
-
-#create-game-area {
-    padding: 5px 0 20px 0 ;
-}
-
-#games {
-    padding-top: 15px;
-}
-
-#chat-messages {
-    text-align: left;
-    font-size: 12px;
-}
-
-#chat-message {
-    width: 100%;
 }
 
 .rps-choices {
@@ -248,4 +240,26 @@ grid-template-columns: auto auto auto;
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#available-games-area {
+    background-color: lightgrey;
+    padding-top: 10px;
+}
+
+#create-game-area {
+    padding: 5px 0 20px 0 ;
+}
+
+#games {
+    padding-top: 15px;
+}
+
+#chat-messages {
+    text-align: left;
+    font-size: 12px;
+}
+
+#chat-message {
+    width: 100%;
 }
