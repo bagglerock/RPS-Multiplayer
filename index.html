@@ -8,125 +8,175 @@
     <link href="https://fonts.googleapis.com/css?family=Ranchers|Poiret+One" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Rock, Paper, Scissors!</title>
+    <title>Rock Paper Scissors
+    </title>
 </head>
 
 <body>
 
-    <div class="wrapper">
+    <main class="main-container">
 
-        <div class="title">
-            <h1>Rock, Paper, Scissors</h1>
-        </div>
+        <header>
+            <h1>Rock Paper Scissors</h1>
+        </header>
 
-        <div class="message-wrapper">
-            <div class="user-login">
-                <input class="user-login-font login" type="text" size="25" placeholder="Enter email" id="login-email">
-                <input class="user-login-font login" type="text" size="25" placeholder="Enter password" id="login-pass">
-                <button class="user-login-font button login" type=button id="login-button">Log In</button>
-                <button class="user-login-font button login" type=button id="signup-modal-button">Sign Up</button>
-                <button class="user-login-font button logout hide" type=button id="logout-button">Log Out</button>
-            </div>
-            <div class="messages" id="message"></div>
-            <div class="logout hide" id="create-game-area">
-                <button class="button" id="create-game">Create Game</button>
-            </div>
-            <div class="logout hide" id="available-games-area">
-                <div class="available-header">
-                    <h4>Available Games:</h4>
+
+        <section class="login-section">
+            <input type="button" value="Log In" id="open-login-button">
+            <input type="button" value="Sign Up" id="open-signup-button">
+            <input type="button" value="Log Out" id="logout-button">
+        </section>
+
+
+        <section class="message-section" id="message">
+        </section>
+
+
+        <section class="games-list-section">
+            <div class="games-list-wrapper">
+                <div class="create">
+                    <input type="button" value="Create Game" id="create-game">
                 </div>
-                <div class="available-games" id="games"></div>
+                <div class="games-list" id="games"></div>
             </div>
+        </section>
 
-        </div>
 
-        <div class="main">
+        <section class="player-section">
+            <div class="player-1-section">
+                <h3>Player 1</h3>
+                <form class="" id="player-1-form">
+                    <ul>
+                        <li>
+                            <input type="radio" name="rps" value="rock">Rock</li>
+                        <li>
+                            <input type="radio" name="rps" value="paper">Paper</li>
+                        <li>
+                            <input type="radio" name="rps" value="scissors">Scissors</li>
+                    </ul>
+                    <button class="button" type="button" id="creator-choice">Submit</button>
+                </form>
+            </div>
+            <div class="player-2-section">
+                <h3>Player 2</h3>
+                <form class="" id="player-2-form">
+                    <ul>
+                        <li>
+                            <input type="radio" name="rps" value="rock">Rock</li>
+                        <li>
+                            <input type="radio" name="rps" value="paper">Paper</li>
+                        <li>
+                            <input type="radio" name="rps" value="scissors">Scissors</li>
+                    </ul>
+                    <button class="button" type="button" id="joiner-choice">Submit</button>
+                </form>
+            </div>
+        </section>
 
-            <div class="player-1 player-wrapper">
-                <div class="player-name" id="player1-name"></div>
-                <div class="rps-choices-view">
-                    <form class="rps-choices hide" id="creator-choices">
-                        <ul>
-                            <li>
-                                <input type="radio" name="rps" value="rock">Rock</li>
-                            <li>
-                                <input type="radio" name="rps" value="paper">Paper</li>
-                            <li>
-                                <input type="radio" name="rps" value="scissors">Scissors</li>
-                        </ul>
-                        <button class="button" type="button" id="creator-choice">Submit</button>
-                    </form>
+
+        <section class="chat-section">
+            <div class="chat-log">
+            </div>
+            <div class="chat-area">
+                <div class="chat-box">
+                    <input id="submit-chat-message"></input>
                 </div>
-                <div class="win-loss" id="player1-winloss"></div>
-            </div>
-
-            <div class="info" id="game-result">
-            </div>
-
-            <div class="player-2 player-wrapper">
-                <div class="player-name" id="player2-name"></div>
-                <div class="rps-choices-view">
-                    <form class="rps-choices hide" id="joiner-choices">
-                        <ul>
-                            <li>
-                                <input type="radio" name="rps" value="rock">Rock</li>
-                            <li>
-                                <input type="radio" name="rps" value="paper">Paper</li>
-                            <li>
-                                <input type="radio" name="rps" value="scissors">Scissors</li>
-                        </ul>
-                        <button class="button" type="button" id="joiner-choice">Submit</button>
-                    </form>
-                </div>
-                <div class="win-loss" id="player2-winloss"></div>
-            </div>
-
-        </div>
-
-        <div class="chat-area-wrapper">
-            <div class="chat-view" id="chat-messages">
-            </div>
-            <div class="chat-submit" id="chat-inputs">
-                <div>
-                    <input class="logout" type="text" placeholder="Chat Stuff" id="chat-message">
-                </div>
-                <div>
-                    <button class="button logout" type=button id="submit-chat">Submit</button>
+                <div class="chat-submit">
+                    <input name="chat-submit" id="submit-chat-button" type="button" value="submit">
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="footer">
-            <h6>&copy;2018 Oscar Villalta</h6>
+
+        <footer>
+            <h2>&copy;2018 Oscar Villalta</h2>
+        </footer>
+
+
+    </main>
+
+    <div id="signup-modal" class="modal">
+        <div class="modal-content animate">
+            <form id="signup-form" autocomplete="on">
+                <div id="signup-container" class="fields">
+                    <ul>
+                        <li>
+                            <label class="signup-labels" for="username">
+                                Name
+                            </label>
+                            <input type="text" placeholder="Enter Name" id="name-input" autocomplete="name" required>
+                        </li>
+                        <li>
+                            <label class="signup-labels" for="email">
+                                Email
+                            </label>
+                            <input type="text" placeholder="Enter Email" id="email-input" autocomplete="email" required>
+                        </li>
+                        <li>
+                            <label class="signup-labels" for="password">
+                                Password
+                            </label>
+                            <input type="password" placeholder="Enter Password" id="pass-input" autocomplete="off" required>
+                        </li>
+                    </ul>
+                </div>
+                <div class="close-container login-button-container">
+                    <div>
+                        <button class="modal-button accept" type="submit" id="signup-button">Sign Up</button>
+                    </div>
+                    <div>
+                        <button class="modal-button cancel" type="button" id="signup-cancel">Cancel</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
     </div>
 
-    <div id="signup" class="signup-modal">
-        <div class="signup-content">
-            <div class="signup-div close">&times;</div>
-            <div class="signup-div">
-                <input class="user-login-font" type="text" size="25" placeholder="Enter name" id="name-input">
-            </div>
-            <div class="signup-div">
-                <input class="user-login-font" type="text" size="25" placeholder="Enter email" id="email-input">
-            </div>
-            <div class="signup-div">
-                <input class="user-login-font" type="text" size="25" placeholder="Enter password" id="pass-input">
-            </div>
-            <div class="signup-div">
-                <button class="user-login-font" type=button id="signup-button">Sign Up</button>
-            </div>
+    <div id="login-modal" class="modal">
+        <div class="modal-content animate">
+            <form id="login-form" autocomplete="on">
+                <div id="login-container" class="fields">
+                    <ul>
+                        <li>
+                            <label class="signup-labels" for="username">
+                                <b>Email</b>
+                            </label>
+                            <input class="login-modal-input" type="text" placeholder="Enter Email" name="username" id="login-email" required>
+                        </li>
+                        <li>
+                            <label class="signup-labels" for="password">
+                                <b>Password</b>
+                            </label>
+                            <input class="login-modal-input" type="password" placeholder="Enter Password" name="password" id="login-pass" autocomplete="off"
+                                required>
+                        </li>
+                    </ul>
+                </div>
+                <div class="close-container">
+                    <div>
+                        <button class="modal-button accept" type="submit" id="login-button">Login</button>
+                    </div>
+                    <div>
+                        <button class="modal-button cancel" type="button" id="login-cancel">Cancel</button>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="./assets/js/init.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chat.js"></script>
+    <script src="./assets/js/game.js"></script>
+    <script src="./assets/js/games.js"></script>
+    <script src="./assets/js/auth.js"></script>
+
+
 
 </body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-<script type="text/javascript" src="./assets/js/rps.js"></script>
-<script type="text/javascript" src="./assets/js/chat.js"></script>
-<script type="text/javascript" src="./assets/js/auth.js"></script>
-<script type="text/javascript" src="./assets/js/games.js"></script>
-
 
 </html>
