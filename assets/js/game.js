@@ -4,7 +4,6 @@ function playGame(key) {
 
     gameRef.on("value", function(snapshot) {
       var game = snapshot.val();
-      console.log(game);
       switch (game.state) {
         case gameState.open:
           if (auth.currentUser.uid === game.creator.uid) {
@@ -12,6 +11,8 @@ function playGame(key) {
             $("#open-signup-button").hide();
             $(".games-list-wrapper").hide();
             $(".create").hide();
+            $("#player-1-form").hide();
+            $("#player-2-form").hide();
             $("#message").text(
               game.creator.displayName + " has just created a game."
             );
@@ -22,6 +23,8 @@ function playGame(key) {
           if (auth.currentUser.uid === game.creator.uid) {
             $("#message").text("You are the creator and its your turn");
             $("#player-1-form").show();
+            $("#player-2-form").hide();
+            $(".create").hide();
             $("#creator-choice").attr("game-id", key);
           } else if (auth.currentUser.uid === game.joiner.uid) {
             $("#message").text(
@@ -29,7 +32,9 @@ function playGame(key) {
                 game.creator.displayName +
                 ".  Please wait till " + game.creator.displayName + " makes a choice."
             );
-            $(".joined-off").addClass("hide");
+            $("#player-1-form").hide();
+            $("#player-2-form").hide();
+            $(".create").hide();
           }
           break;
   
@@ -38,10 +43,12 @@ function playGame(key) {
             $("#message").text(
               game.creator.displayName + " has just went so it's your turn."
             );
-            $(".joined-on-joiner").removeClass("hide");
+            $("#player-2-form").show();
+            $("#player-1-form").hide();
             $("#joiner-choice").attr("game-id", key);
           } else if (auth.currentUser.uid === game.creator.uid) {
-            $(".p1-off").addClass("hide");
+            $("#player-1-form").hide();
+            $("#player-2-form").hide();
             $("#message").text(
               "Nice move, now wait for the next player to choose."
             );
@@ -50,8 +57,6 @@ function playGame(key) {
   
         case gameState.p2chose:
           $("#message").text("");
-          $(".p2-off").addClass("hide");
-          $(".p2-on").removeClass("hide");
           var result = "";
           var creatorChoice = game.creator.choice;
           var joinerChoice = game.joiner.choice;
@@ -77,15 +82,15 @@ function playGame(key) {
             }
           }
           $("#message").text(result);
-          $("#game-result").text("build a whole DOM element here with stats.");
-          console.log(game);
-          gameRef.child("state").set(gameState.result);
+          //$("#game-result").text("build a whole DOM element here with stats.");
+          console.log(result);
+          //gameRef.child("state").set(gameState.result);
           break;
   
         case gameState.result:
-          setTimeout(function(){
-            gameRef.child("state").set(gameState.joined);
-          }, console.log(result));
+        //   setTimeout(function(){
+        //     gameRef.child("state").set(gameState.joined);
+        //   }, console.log(result));
           break;
       }
     });

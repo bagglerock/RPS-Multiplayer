@@ -53,7 +53,6 @@ function createGame() {
 }
 
 function joinGame(key) {
-    console.log(key);
     var user = auth.currentUser;
     var gameRef = ref.child(key);
     gameRef.transaction(function (game) {
