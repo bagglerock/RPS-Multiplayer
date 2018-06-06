@@ -22,9 +22,9 @@
 
 
         <section class="login-section">
-            <input type="button" value="Log In" id="open-login-button">
-            <input type="button" value="Sign Up" id="open-signup-button">
-            <input type="button" value="Log Out" id="logout-button">
+            <input class="front-end-button" type="button" value="Log In" id="open-login-button">
+            <input class="front-end-button" type="button" value="Sign Up" id="open-signup-button">
+            <input class="front-end-button" type="button" value="Log Out" id="logout-button">
         </section>
 
 
@@ -35,7 +35,7 @@
         <section class="games-list-section">
             <div class="games-list-wrapper">
                 <div class="create">
-                    <input type="button" value="Create Game" id="create-game">
+                    <input class="front-end-button" type="button" value="Create Game" id="create-game">
                 </div>
                 <div class="games-list" id="games"></div>
             </div>
@@ -54,7 +54,7 @@
                         <li>
                             <input type="radio" name="rps" value="scissors">Scissors</li>
                     </ul>
-                    <button class="button" type="button" id="creator-choice">Submit</button>
+                    <button class="front-end-button" type="button" id="creator-choice">Submit</button>
                 </form>
             </div>
             <div class="player-2-section">
@@ -68,7 +68,7 @@
                         <li>
                             <input type="radio" name="rps" value="scissors">Scissors</li>
                     </ul>
-                    <button class="button" type="button" id="joiner-choice">Submit</button>
+                    <button class="front-end-button" type="button" id="joiner-choice">Submit</button>
                 </form>
             </div>
         </section>
@@ -79,10 +79,10 @@
             </div>
             <div class="chat-area">
                 <div class="chat-box">
-                    <input id="submit-chat-message"></input>
+                    <input class="input-box" id="submit-chat-message"></input>
                 </div>
                 <div class="chat-submit">
-                    <input name="chat-submit" id="submit-chat-button" type="button" value="submit">
+                    <input class="front-end-button" name="chat-submit" id="submit-chat-button" type="button" value="submit">
                 </div>
             </div>
         </section>
@@ -104,19 +104,19 @@
                             <label class="signup-labels" for="username">
                                 Name
                             </label>
-                            <input type="text" placeholder="Enter Name" id="name-input" autocomplete="name" required>
+                            <input class="input-box" type="text" placeholder="Enter Name" id="name-input" autocomplete="name" required>
                         </li>
                         <li>
                             <label class="signup-labels" for="email">
                                 Email
                             </label>
-                            <input type="text" placeholder="Enter Email" id="email-input" autocomplete="email" required>
+                            <input class="input-box" type="text" placeholder="Enter Email" id="email-input" autocomplete="email" required>
                         </li>
                         <li>
                             <label class="signup-labels" for="password">
                                 Password
                             </label>
-                            <input type="password" placeholder="Enter Password" id="pass-input" autocomplete="off" required>
+                            <input class="input-box" type="password" placeholder="Enter Password" id="pass-input" autocomplete="off" required>
                         </li>
                     </ul>
                 </div>
@@ -142,13 +142,13 @@
                             <label class="signup-labels" for="username">
                                 <b>Email</b>
                             </label>
-                            <input class="login-modal-input" type="text" placeholder="Enter Email" name="username" id="login-email" required>
+                            <input class="input-box" type="text" placeholder="Enter Email" name="username" id="login-email" required>
                         </li>
                         <li>
                             <label class="signup-labels" for="password">
                                 <b>Password</b>
                             </label>
-                            <input class="login-modal-input" type="password" placeholder="Enter Password" name="password" id="login-pass" autocomplete="off"
+                            <input class="input-box" type="password" placeholder="Enter Password" name="password" id="login-pass" autocomplete="off"
                                 required>
                         </li>
                     </ul>
