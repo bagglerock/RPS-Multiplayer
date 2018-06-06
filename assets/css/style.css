@@ -94,7 +94,7 @@ header {
 .create {
     text-align: center;
     border-bottom: 1px solid red;
-    padding-bottom: 3px;
+    padding: 3px;
 }
 
 .games-list {
