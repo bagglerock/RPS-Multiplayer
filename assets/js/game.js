@@ -84,31 +84,17 @@ function playGame(key) {
           $("#message").text(result);
           //$("#game-result").text("build a whole DOM element here with stats.");
           console.log(result);
-          //gameRef.child("state").set(gameState.result);
+          gameRef.child("state").set(gameState.result);
           break;
   
         case gameState.result:
-        //   setTimeout(function(){
-        //     gameRef.child("state").set(gameState.joined);
-        //   }, console.log(result));
+           setTimeout(function(){
+             gameRef.child("state").set(gameState.joined);
+           }, 10000);
           break;
       }
     });
   }
-
-  // this is being hit 3x with once and 5 or 6 with on
-  // database.ref("/games").on("child_added", function(snapshot) {
-  //   var currentGame = snapshot.key;
-  //   playGame(currentGame);
-  // });
-  
-  // this is being hit 3x with once and 5 or 6 with on
-  // database.ref("/games").on("child_changed", function(snapshot) {
-  //   var currentGame = snapshot.key;
-  //   console.log("changed");
-  //   console.log(snapshot.val())
-  //   //playGame(currentGame);
-  // });
   
   $("#creator-choice").on("click", function() {
     var choice = $("input[name=rps]:checked").val();
