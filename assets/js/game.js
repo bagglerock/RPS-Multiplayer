@@ -96,15 +96,19 @@ function playGame(key) {
     });
   }
 
-  database.ref("/games").on("child_added", function(snapshot) {
-    var currentGame = snapshot.key;
-    playGame(currentGame);
-  });
+  // this is being hit 3x with once and 5 or 6 with on
+  // database.ref("/games").on("child_added", function(snapshot) {
+  //   var currentGame = snapshot.key;
+  //   playGame(currentGame);
+  // });
   
-  database.ref("/games").on("child_changed", function(snapshot) {
-    var currentGame = snapshot.key;
-    playGame(currentGame);
-  });
+  // this is being hit 3x with once and 5 or 6 with on
+  // database.ref("/games").on("child_changed", function(snapshot) {
+  //   var currentGame = snapshot.key;
+  //   console.log("changed");
+  //   console.log(snapshot.val())
+  //   //playGame(currentGame);
+  // });
   
   $("#creator-choice").on("click", function() {
     var choice = $("input[name=rps]:checked").val();
