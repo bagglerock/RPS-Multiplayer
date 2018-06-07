@@ -121,6 +121,10 @@ header {
     overflow: auto;
 }
 
+/* .chat-log-text {
+    font-family: Arial, Helvetica, sans-serif;
+} */
+
 .chat-area {
     display: grid;
     grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content);

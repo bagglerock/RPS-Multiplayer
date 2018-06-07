@@ -29,8 +29,9 @@ $("#submit-chat-message").keyup(function (event) {
 database.ref("/chat").on("child_added", function (snapshot) {
     var message = snapshot.val();
     if (message.name !== undefined) {
+
         var pTag = $("<p>");
-        pTag.text(message.name + ": " + message.message);
+        pTag.html("<b>" + message.name + ": </b>" + message.message);
         $(".chat-log").append(pTag);
         //  neat little piece of code that autoscrolls to the bottom of the text area
         var textarea = $(".chat-log");
